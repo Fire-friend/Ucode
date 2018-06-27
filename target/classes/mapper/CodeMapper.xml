@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.firefriend.code.dao.CodeMapper">
+
+	<resultMap id="BaseResultMap" type="cn.firefriend.code.entity.Code">
+		<id column="code_id" property="codeId" jdbcType="INTEGER" />
+		<result column="code_name" property="codeName" jdbcType="VARCHAR" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="is_public" property="isPublic" jdbcType="BOOLEAN" />
+		<result column="creat_time" property="creatTime" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="permissions" property="permissions" jdbcType="INTEGER" />
+		<association property="user" column="user_id" javaType="cn.firefriend.code.entity.User">
+			<id column="user_id" property="userId" />
+			<result column="username" property="username" />
+		</association>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		code_id, code_name, path, is_public, creat_time,
+		description,image_path
+	</sql>
+
+	<insert id="insertCodeUser" parameterType="cn.firefriend.code.entity.Code">
+		insert into tb_code_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="user != null">
+				user_id,
+			</if>
+			<if test="codeId != null">
+				code_id,
+			</if>
+			<if test="permissions != null">
+				permissions,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="user != null">
+				#{user.userId},
+			</if>
+			<if test="codeId != null">
+				#{codeId},
+			</if>
+			<if test="permissions != null">
+				#{permissions},
+			</if>
+		</trim>
+	</insert>
+
+	<insert id="insertCode" parameterType="cn.firefriend.code.entity.Code"
+		useGeneratedKeys="true" keyColumn="code_id" keyProperty="codeId">
+		insert into tb_code
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="codeName != null">
+				code_name,
+			</if>
+			<if test="path != null">
+				path,
+			</if>
+			<if test="isPublic != null">
+				is_public,
+			</if>
+			<if test="creatTime != null">
+				creat_time,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="imagePath != null">
+				image_path,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="codeName != null">
+				#{codeName,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="isPublic != null">
+				#{isPublic,jdbcType=BOOLEAN},
+			</if>
+			<if test="creatTime != null">
+				#{creatTime,jdbcType=DATE},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="imagePath != null">
+				#{imagePath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="queryAll" parameterType="cn.firefriend.code.entity.User"
+		resultMap="BaseResultMap">
+		SELECT
+		c.code_id, c.code_name, c.path,
+		c.is_public,
+		c.creat_time,c.description,
+		c.image_path,cu.permissions
+		FROM
+		tb_user u,
+		tb_code c ,
+		tb_code_user cu
+		WHERE
+		c.code_id=cu.code_id
+		AND
+		u.user_id=cu.user_id
+		AND
+		cu.user_id = #{userId}
+	</select>
+
+	<select id="queryByCodeNameAndUser" parameterType="cn.firefriend.code.entity.Code"
+		resultMap="BaseResultMap">
+		SELECT
+		c.code_id, c.code_name, c.path,
+		c.is_public, 
+		c.creat_time,c.description,
+		c.image_path,cu.permissions
+		FROM
+		tb_user u,
+		tb_code c ,
+		tb_code_user cu
+		WHERE
+		c.code_id=cu.code_id
+		AND
+		u.user_id=cu.user_id
+		AND
+		cu.user_id = #{user.userId}
+		AND
+		c.code_name = #{codeName}
+	</select>
+	
+	<select id="queryByCodeId" parameterType="cn.firefriend.code.entity.Code"
+		resultMap="BaseResultMap">
+		SELECT
+		c.code_id, c.code_name, c.path,
+		c.is_public, u.user_id,u.username,
+		c.creat_time,c.description,
+		c.image_path,cu.permissions
+		FROM
+		tb_user u,
+		tb_code c ,
+		tb_code_user cu
+		WHERE
+		c.code_id=cu.code_id
+		AND
+		u.user_id=cu.user_id
+		AND
+		c.code_id = #{codeId}
+		AND
+		cu.permissions = #{permissions}
+	</select>
+</mapper>

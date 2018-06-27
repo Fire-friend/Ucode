@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../resources/css/creat_project.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div>
+			<h1>新建项目</h1>
+		</div>
+		<div>
+			<span>项目名称</span>
+		</div>
+		<input class="name_content" id="code_name" type="text" maxlength="15" placeholder="不超过15个字符" />
+		<div>
+			<span>项目描述</span>
+		</div>
+		<div class="description_content">
+			<textarea id="code_description" placeholder="请用一句话描述一下这个项目" rows="5"></textarea>
+		</div>
+		<div class="public_sign">
+			<input type="checkbox" id="public_check" value="on" />
+			<span>公开源代码</span>
+		</div>
+		<div>
+			<span>项目成员</span>
+		</div>
+		<div>
+			<ul class="member_content">
+				<li class="member_add">
+				</li>
+				<li>
+				</li>
+				<li >
+				</li>
+			</ul>
+		</div>
+		<div class="button_do">
+			<button type="button" id="creat_button">
+				<span>新建项目</span>
+			</button>
+			<button type="button" id="cancel_button">
+				<span>取消</span>
+			</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../resources/layui/layui.all.js"></script>
+	<script type="text/javascript" src="../resources/js/creat_project.js"></script>
+</html>

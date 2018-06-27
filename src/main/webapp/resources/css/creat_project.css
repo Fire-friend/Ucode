@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+*{
+	font-size: 16px;
+	font-family:"微软雅黑";	
+}
+
+body {
+	margin: 20px;
+}
+li {list-style-type:none;}
+span {
+	font-size: 12px;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+
+.name_content{
+	width: 790px;
+	height: 30px;
+}
+
+.description_content textarea{
+	width: 790px;
+}
+
+.public_sign{
+	margin-top:10px ;
+}
+.public_sign input{
+	width: 20px;
+	height: 20px;
+	background-color: white;
+}
+
+.public_sign span{
+	font-size: 15px;
+	position: absolute;
+	margin-left: 6px;
+	margin-top: -5px;
+}
+
+.member_content{
+	 display:inline;
+}
+
+.member_content li{
+	cursor:pointer;
+	margin-left: 0px;
+	width: 30px;
+	height: 30px;
+	border-radius:15px;
+	text-align: center;
+	display: inline-block;
+	background-image: url(../img/timg.jpg);
+	background-size: 100%100%;
+}
+
+.member_content .member_add{
+	background-image: url(../img/add.jpg);
+	background-size: 100%100%;
+}
+
+.button_do button{
+	height: 40px;
+	width: 80px;
+	text-align: center;
+	background-color: white;
+	border: 1px solid;
+	border-radius:3px;
+	margin-right: 20px;
+	margin-top: 30px;
+	line-height: 20px;
+}
+.button_do span{
+	cursor:pointer;
+	font-size: 15px;
+	line-height: 20px;
+}
